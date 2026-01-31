@@ -31,18 +31,30 @@ const Hero = ({ className }) => {
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((service, index) => (
-          <div
-            key={index}
-            className=" bg-white relative rounded-lg shadow-md overflow-hidden
-                       h-48 sm:h-56 md:h-64 lg:h-72"
-          >
-            <img
-              src={service.img}
-              alt={service.title}
-              className="w-full h-full object-cover"
-            />
-            <div className=" font-bold absolute bottom-0 w-full bg-black/60 text-white text-center py-2">{service.title}</div>
-          </div>
+       <div
+  key={index}
+  className="relative bg-white rounded-lg shadow-md overflow-hidden
+             h-48 sm:h-56 md:h-64 lg:h-72 group cursor-pointer"
+>
+  <img
+    src={service.img}
+    alt={service.title}
+    className="w-full h-full object-cover
+               transition-transform duration-500
+               group-hover:scale-110"
+  />
+
+  
+  <div className="absolute inset-0 bg-black/0 transition duration-500
+                  group-hover:bg-black/20"></div>
+
+  
+  <div className="font-bold absolute bottom-0 w-full bg-black/60
+                  text-white text-center py-2">
+    {service.title}
+  </div>
+</div>
+
         ))}
       </div>
     </div>
