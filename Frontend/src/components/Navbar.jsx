@@ -27,10 +27,31 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-8 text-lg">
-          <a href="#" className="hover:text-blue-600">थप जानकारी</a>
-          <a href="#" className="hover:text-blue-600">Contact Us</a>
-          <a href="#" className="hover:text-blue-600">Sign In</a>
+        <div className="hidden md:flex gap-8 items-center text-lg">
+
+          {/* Desktop underline only */}
+          <a href="#" className="relative group font-medium">
+            थप जानकारी
+            <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-blue-600 
+                             transition-all duration-300 
+                             md:group-hover:w-full md:group-hover:left-0"></span>
+          </a>
+
+          {/* Desktop underline only */}
+          <a href="#" className="relative group font-medium">
+            Contact Us
+            <span className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-blue-600 
+                             transition-all duration-300 
+                             md:group-hover:w-full md:group-hover:left-0"></span>
+          </a>
+
+          {/* Button */}
+          <a
+            href="#"
+            className="shadow-md bg-orange-600 rounded-xl px-4 py-1 text-white font-semibold hover:bg-orange-700 transition"
+          >
+            Sign In
+          </a>
         </div>
 
         {/* Mobile Button */}
@@ -48,7 +69,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-4">
-          
+
           {/* Mobile Search */}
           <div className="relative">
             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -59,9 +80,22 @@ const Navbar = () => {
             />
           </div>
 
-          <a href="#" className="block hover:text-blue-600">थप जानकारी</a>
-          <a href="#" className="block hover:text-blue-600">Contact Us</a>
-          <a href="#" className="block hover:text-blue-600">Sign In</a>
+          {/* Mobile links (NO hover effect) */}
+          <a href="#" className="block font-medium">
+            थप जानकारी
+          </a>
+
+          <a href="#" className="block font-medium">
+            Contact Us
+          </a>
+
+          <a
+            href="#"
+            className="block shadow-md bg-orange-600 rounded-xl px-4 py-2 
+                       text-white text-center font-bold hover:bg-orange-700 transition"
+          >
+            Sign In
+          </a>
         </div>
       )}
     </nav>

@@ -3,44 +3,47 @@ import electrician from "../assets/electricity.jpg";
 import plumber from "../assets/plumber.jpg";
 import car from "../assets/car.jpg";
 import nurse from "../assets/nurse.avif";
-import teacher from "../assets/teacher.avif"
+import teacher from "../assets/teacher.avif";
 import carpenter from "../assets/carpenter.jpg";
-import cleaner from "../assets/cleaner.webp"
+import cleaner from "../assets/cleaner.webp";
 
+const services = [
+  { img: plumber, title: "Plumber" },
+  { img: electrician, title: "Electrician" },
+  { img: nurse, title: "Nurse" },
+  { img: teacher, title: "Teacher" },
+  { img: car, title: "Car Repair" },
+  { img: plumber, title: "Plumber" },
+  { img: carpenter, title: "Carpenter" },
+  { img: cleaner, title: "Cleaner" },
+];
 
 const Hero = ({ className }) => {
   return (
-    <div className={`w-full ${className} min-h-screen p-5 flex flex-col  `}>
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 mt-20 text-center">
-        Our Services
-      </h1>
+    <div className={`w-full min-h-screen p-5 ${className}`}>
+    <h1 className="text-3xl md:text-4xl font-extrabold mb-12 mt-20 text-center
+               bg-gradient-to-r from-indigo-600 via-purple-900 to-pink-500
+               bg-clip-text text-transparent">
+  Our Services
+</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={plumber} alt="Plumber" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={electrician} alt="Electrician" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={nurse} alt="Nurse" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={teacher} alt="Teacher" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={car} alt="Car" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={plumber} alt="Plumber" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={carpenter} alt="Carpenter" className="h-full w-full" />
-        </div>
-        <div className="h-40 w-full md:h-80 md:w-80 flex items-center justify-center bg-white">
-          <img src={cleaner} alt="Cleaner" className="h-full w-full" />
-        </div>
 
+
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className=" bg-white relative rounded-lg shadow-md overflow-hidden
+                       h-48 sm:h-56 md:h-64 lg:h-72"
+          >
+            <img
+              src={service.img}
+              alt={service.title}
+              className="w-full h-full object-cover"
+            />
+            <div className=" font-bold absolute bottom-0 w-full bg-black/60 text-white text-center py-2">{service.title}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
