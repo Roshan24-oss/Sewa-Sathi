@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import logo from "../assets/logo.png";
 
@@ -46,12 +47,13 @@ const Navbar = () => {
           </a>
 
           {/* Button */}
-          <a
-            href="#"
-            className="shadow-md bg-orange-600 rounded-xl px-4 py-1 text-white font-semibold hover:bg-orange-700 transition"
-          >
-            Sign In
-          </a>
+  <Link
+          
+          to="/signin"
+          
+          className="shadow-md bg-orange-600 rounded-xl px-4 py-1 text-white font-semibold hover:bg-orange-700 transition">Sign In</Link>
+          
+        
         </div>
 
         {/* Mobile Button */}
@@ -89,13 +91,11 @@ const Navbar = () => {
             Contact Us
           </a>
 
-          <a
-            href="#"
-            className="block shadow-md bg-orange-600 rounded-xl px-4 py-2 
+      
+          <Link
+          to="/signin" className="block shadow-md bg-orange-600 rounded-xl px-4 py-2 
                        text-white text-center font-bold hover:bg-orange-700 transition"
-          >
-            Sign In
-          </a>
+          >Sign In</Link>
         </div>
       )}
     </nav>
