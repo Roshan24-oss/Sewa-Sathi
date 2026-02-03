@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 
 const SignIn = () => {
   return (
@@ -48,9 +49,7 @@ const SignIn = () => {
         {/* Footer */}
         <p className="text-sm text-center mt-4">
           Don’t have an account?{' '}
-          <span className="text-amber-600 cursor-pointer">
-            Sign up
-          </span>
+           <Link to="/signup" className="text-amber-600 cursor-pointer">Sign Up</Link>
         </p>
 
       </div>
