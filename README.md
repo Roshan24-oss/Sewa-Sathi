@@ -1,1 +1,1 @@
-# Sewa-Sathi . It is a online platform for geting local daily life services.
+# Sewa-Sathi . It is an online platform for getting local daily life services
