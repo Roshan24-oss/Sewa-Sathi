@@ -1,103 +1,106 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [role, setRole] = useState("customer");
 
   return (
-    <div className="bg-amber-100 min-h-screen flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-xl w-full max-w-md p-6">
-        
-        {/* Title */}
-        <h2 className="text-2xl font-bold text-center text-amber-600 mb-6">
-          Create Account
-        </h2>
+    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center px-4">
+      <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
+
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold text-amber-600">
+            Join SewaSathi
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Find or provide trusted local services
+          </p>
+        </div>
 
         <form className="space-y-4">
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Full Name
-            </label>
+            <label className="text-sm font-medium">Full Name</label>
             <input
               type="text"
               placeholder="John Doe"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Email
-            </label>
+            <label className="text-sm font-medium">Email</label>
             <input
               type="email"
-              placeholder="roshan@gmail.com"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              placeholder="example@gmail.com"
+              className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Phone Number
-            </label>
+            <label className="text-sm font-medium">Phone Number</label>
             <input
               type="tel"
               placeholder="98XXXXXXXX"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Password
-            </label>
+            <label className="text-sm font-medium">Password</label>
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
 
-          {/* Role Selection */}
+          {/* Role Toggle */}
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="text-sm font-medium block mb-2">
               Register As
             </label>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  value="customer"
-                  checked={role === "customer"}
-                  onChange={(e) => setRole(e.target.value)}
-                />
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setRole("customer")}
+                className={`w-1/2 py-2 rounded-xl font-medium border transition
+                  ${
+                    role === "customer"
+                      ? "bg-amber-500 text-white border-amber-500"
+                      : "bg-white text-gray-600 hover:bg-amber-50"
+                  }`}
+              >
                 Customer
-              </label>
+              </button>
 
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  value="provider"
-                  checked={role === "provider"}
-                  onChange={(e) => setRole(e.target.value)}
-                />
-                Service Provider
-              </label>
+              <button
+                type="button"
+                onClick={() => setRole("provider")}
+                className={`w-1/2 py-2 rounded-xl font-medium border transition
+                  ${
+                    role === "provider"
+                      ? "bg-amber-500 text-white border-amber-500"
+                      : "bg-white text-gray-600 hover:bg-amber-50"
+                  }`}
+              >
+                Provider
+              </button>
             </div>
           </div>
 
-          {/* Service Type (only for provider) */}
+          {/* Provider Service */}
           {role === "provider" && (
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Service Type
+            <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
+              <label className="text-sm font-medium">
+                Select Service
               </label>
-              <select className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
-                <option value="">Select Service</option>
+              <select className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none">
+                <option value="">Choose service</option>
                 <option>Plumber</option>
                 <option>Electrician</option>
                 <option>Tutor</option>
@@ -109,19 +112,24 @@ const SignUp = () => {
             </div>
           )}
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-amber-500 text-white py-2 rounded-lg font-semibold hover:bg-amber-600 transition"
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-semibold transition"
           >
-            Sign Up
+            Create Account
           </button>
         </form>
 
         {/* Footer */}
-        <p className="text-sm text-center mt-4">
+        <p className="text-center text-sm mt-6 text-gray-600">
           Already have an account?{" "}
-         <Link to="/signin" className="text-amber-500">Login</Link>
+          <Link
+            to="/signin"
+            className="text-amber-600 font-medium hover:underline"
+          >
+            Login
+          </Link>
         </p>
       </div>
     </div>
