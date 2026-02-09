@@ -1,8 +1,44 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
-  const [role, setRole] = useState("customer");
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    password: "",
+    role: "customer",
+    service: "",
+  });
+
+  const { fullName, email, phone, password, role, service } = formData;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRoleChange = (selectedRole) => {
+    setFormData({
+      ...formData,
+      role: selectedRole,
+      service: "",
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:8000/api/auth/signup", formData);
+      alert("Signup successful ✅");
+      navigate("/signin");
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed ❌");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center px-4">
@@ -10,21 +46,22 @@ const SignUp = () => {
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-amber-600">
-            Join SewaSathi
-          </h2>
+          <h2 className="text-3xl font-bold text-amber-600">Join SewaSathi</h2>
           <p className="text-sm text-gray-500 mt-1">
             Find or provide trusted local services
           </p>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Full Name */}
           <div>
             <label className="text-sm font-medium">Full Name</label>
             <input
               type="text"
-              placeholder="John Doe"
+              name="fullName"
+              value={fullName}
+              onChange={handleChange}
+              required
               className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
@@ -34,7 +71,10 @@ const SignUp = () => {
             <label className="text-sm font-medium">Email</label>
             <input
               type="email"
-              placeholder="example@gmail.com"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              required
               className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
@@ -44,7 +84,10 @@ const SignUp = () => {
             <label className="text-sm font-medium">Phone Number</label>
             <input
               type="tel"
-              placeholder="98XXXXXXXX"
+              name="phone"
+              value={phone}
+              onChange={handleChange}
+              required
               className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
@@ -54,7 +97,10 @@ const SignUp = () => {
             <label className="text-sm font-medium">Password</label>
             <input
               type="password"
-              placeholder="••••••••"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              required
               className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
             />
           </div>
@@ -67,26 +113,22 @@ const SignUp = () => {
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => setRole("customer")}
-                className={`w-1/2 py-2 rounded-xl font-medium border transition
-                  ${
-                    role === "customer"
-                      ? "bg-amber-500 text-white border-amber-500"
-                      : "bg-white text-gray-600 hover:bg-amber-50"
-                  }`}
+                onClick={() => handleRoleChange("customer")}
+                className={`w-1/2 py-2 rounded-xl font-medium border
+                  ${role === "customer"
+                    ? "bg-amber-500 text-white"
+                    : "bg-white text-gray-600"}`}
               >
                 Customer
               </button>
 
               <button
                 type="button"
-                onClick={() => setRole("provider")}
-                className={`w-1/2 py-2 rounded-xl font-medium border transition
-                  ${
-                    role === "provider"
-                      ? "bg-amber-500 text-white border-amber-500"
-                      : "bg-white text-gray-600 hover:bg-amber-50"
-                  }`}
+                onClick={() => handleRoleChange("provider")}
+                className={`w-1/2 py-2 rounded-xl font-medium border
+                  ${role === "provider"
+                    ? "bg-amber-500 text-white"
+                    : "bg-white text-gray-600"}`}
               >
                 Provider
               </button>
@@ -96,10 +138,14 @@ const SignUp = () => {
           {/* Provider Service */}
           {role === "provider" && (
             <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
-              <label className="text-sm font-medium">
-                Select Service
-              </label>
-              <select className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none">
+              <label className="text-sm font-medium">Select Service</label>
+              <select
+                name="service"
+                value={service}
+                onChange={handleChange}
+                required
+                className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
+              >
                 <option value="">Choose service</option>
                 <option>Plumber</option>
                 <option>Electrician</option>
@@ -112,22 +158,17 @@ const SignUp = () => {
             </div>
           )}
 
-          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-semibold transition"
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-semibold"
           >
             Create Account
           </button>
         </form>
 
-        {/* Footer */}
         <p className="text-center text-sm mt-6 text-gray-600">
           Already have an account?{" "}
-          <Link
-            to="/signin"
-            className="text-amber-600 font-medium hover:underline"
-          >
+          <Link to="/signin" className="text-amber-600 font-medium">
             Login
           </Link>
         </p>
