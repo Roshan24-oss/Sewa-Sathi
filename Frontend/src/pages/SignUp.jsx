@@ -11,10 +11,10 @@ const SignUp = () => {
     phone: "",
     password: "",
     role: "customer",
-    service: "",
+    services: "",
   });
 
-  const { fullName, email, phone, password, role, service } = formData;
+  const { fullName, email, phone, password, role, services } = formData;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +24,7 @@ const SignUp = () => {
     setFormData({
       ...formData,
       role: selectedRole,
-      service: "",
+      services: "",
     });
   };
 
@@ -32,9 +32,21 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8000/api/auth/signup", formData);
+      const res = await axios.post(
+        "http://localhost:8000/api/auth/signup",
+        formData
+      );
+
+      // Save token & user
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      console.log("Signup Response:", res.data);
+
       alert("Signup successful ✅");
-      navigate("/signin");
+
+      // Redirect after signup
+      navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed ❌");
     }
@@ -53,6 +65,7 @@ const SignUp = () => {
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
+          
           {/* Full Name */}
           <div>
             <label className="text-sm font-medium">Full Name</label>
@@ -114,10 +127,11 @@ const SignUp = () => {
               <button
                 type="button"
                 onClick={() => handleRoleChange("customer")}
-                className={`w-1/2 py-2 rounded-xl font-medium border
-                  ${role === "customer"
+                className={`w-1/2 py-2 rounded-xl font-medium border ${
+                  role === "customer"
                     ? "bg-amber-500 text-white"
-                    : "bg-white text-gray-600"}`}
+                    : "bg-white text-gray-600"
+                }`}
               >
                 Customer
               </button>
@@ -125,10 +139,11 @@ const SignUp = () => {
               <button
                 type="button"
                 onClick={() => handleRoleChange("provider")}
-                className={`w-1/2 py-2 rounded-xl font-medium border
-                  ${role === "provider"
+                className={`w-1/2 py-2 rounded-xl font-medium border ${
+                  role === "provider"
                     ? "bg-amber-500 text-white"
-                    : "bg-white text-gray-600"}`}
+                    : "bg-white text-gray-600"
+                }`}
               >
                 Provider
               </button>
@@ -140,24 +155,25 @@ const SignUp = () => {
             <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
               <label className="text-sm font-medium">Select Service</label>
               <select
-                name="service"
-                value={service}
+                name="services"
+                value={services}
                 onChange={handleChange}
                 required
                 className="mt-1 w-full border rounded-xl px-4 py-2 focus:ring-2 focus:ring-amber-400 outline-none"
               >
                 <option value="">Choose service</option>
-                <option>Plumber</option>
-                <option>Electrician</option>
-                <option>Tutor</option>
-                <option>Carpenter</option>
-                <option>Doctor</option>
-                <option>Cleaner</option>
-                <option>Other</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Tutor">Tutor</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Cleaner">Cleaner</option>
+                <option value="Other">Other</option>
               </select>
             </div>
           )}
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-semibold"
