@@ -33,7 +33,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    navigate("/signin");
+    navigate("/");
   };
 
   return (
@@ -48,8 +48,12 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-lg">
 
-          <a href="#" className="font-medium">थप जानकारी</a>
-          <a href="#" className="font-medium">Contact Us</a>
+          
+
+          <Link to ="/moreinfo" className="font-medium">थप जानकारी</Link>
+          
+          <Link to="/contact" className="block font-medium">ContactUs</Link>
+          
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
@@ -107,8 +111,11 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-4">
 
-          <a href="#" className="block font-medium">थप जानकारी</a>
-          <a href="#" className="block font-medium">Contact Us</a>
+        
+          <Link to="/moreinfo"className="block font-medium">थप जानकारी</Link>
+
+          <Link to="/contact" className="block font-medium">ContactUs</Link>
+         
 
           {user ? (
             <>
@@ -129,7 +136,7 @@ const Navbar = () => {
             </>
           ) : (
             <Link
-              to="/"
+              to="/signin"
               className="block bg-orange-600 rounded-xl px-4 py-2 text-white text-center font-bold"
             >
               Sign In
