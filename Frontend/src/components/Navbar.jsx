@@ -36,12 +36,17 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <nav className="fixed top-0 w-full bg-amber-200 shadow-md z-50">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <div>
+        <div onClick={handleLogoClick}
+        >
           <img src={logo} alt="logo" className="h-12" />
         </div>
 
