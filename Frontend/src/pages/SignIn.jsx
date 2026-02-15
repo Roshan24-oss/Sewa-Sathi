@@ -28,6 +28,7 @@ const SignIn = () => {
 
       alert("Login successful ✅");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       alert(error.response?.data?.message || "Login failed ❌");
     }
