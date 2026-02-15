@@ -18,7 +18,7 @@ const ContactUs = () => {
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-50 to-white py-16 px-6">
       
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
+      <div className="text-center max-w-2xl mx-auto mt-10">
         <h1 className="text-4xl font-bold text-blue-600">
           Get In Touch with Us
         </h1>
