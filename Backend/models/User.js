@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const userSchema = new mongoose.Schema({
 
     fullName:{
@@ -9,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        requied:true,
+        required:true,   // ❗ also fix spelling (you wrote requied)
         unique:true,
     },
     password:{
@@ -28,24 +27,24 @@ const userSchema = new mongoose.Schema({
     services:{
         type:String,
     },
+
+    // 🔥 ADD THESE FOR PROVIDER
+    address:{
+        type:String,
+    },
+    experience:{
+        type:Number,
+    },
+    skills:{
+        type:String,
+    },
+    availability:{
+        type:String,
+    },
+    about:{
+        type:String,
+    }
+
 },{timestamps:true})
 
 export default mongoose.model("User", userSchema)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
