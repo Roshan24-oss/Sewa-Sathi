@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../api/axiosInstance"; // use your interceptor
+import axiosInstance from "../api/axiosInstance"; 
+import {useNavigate} from "react-router-dom";
+
 
 const ProviderDashboard = () => {
+
+    const navigate=useNavigate();
   const [user, setUser] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -35,8 +39,8 @@ const ProviderDashboard = () => {
         formData
         
       );
-
-      alert("Profile Updated Successfully ✅");
+     
+      navigate("/providerhome");
       console.log(res.data);
     } catch (error) {
       alert("Error updating profile ❌");

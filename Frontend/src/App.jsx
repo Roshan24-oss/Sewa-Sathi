@@ -9,7 +9,7 @@ import MoreInfo from "./pages/MoreInfo.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import WhatsAppButton from "./components/WhatsApp.jsx";
 import ProviderDashboard from "./components/ProviderDashboard.jsx";
-
+import ProviderHome from "./pages/ProviderHome.jsx";
 const App = () => {
   const user= JSON.parse(localStorage.getItem("user"));
   return (
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/moreinfo" element={<MoreInfo />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/providerhome" element={<ProviderHome />} />
       </Routes>
 
       <Footer />
