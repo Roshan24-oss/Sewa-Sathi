@@ -19,6 +19,9 @@ const services = [
 ];
 
 const Hero = ({ className }) => {
+
+  
+
   return (
     <div className={`w-full min-h-screen p-5 ${className}`}>
     <h1 className="text-3xl md:text-4xl font-extrabold mb-12 mt-20 text-center
@@ -51,7 +54,7 @@ const Hero = ({ className }) => {
   
   <div className="font-bold absolute bottom-0 w-full bg-black/60
                   text-white text-center py-2">
-    {service.title}
+    {service.title}  <span className="text-sm text-gray-300 block mt-1"><button className="bg-red-600 rounded p-1 hover:bg-orange-600 ">Book Now</button></span>
   </div>
 </div>
 
