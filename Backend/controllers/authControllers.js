@@ -38,9 +38,17 @@ export const Signup = async (req, res) => {
       { expiresIn: "7d" }
     );
 
+    // store token in HTTP only cookie
+    res.cookie("token",token,{
+      httpOnly:true,
+      secure:process.env.NODE_ENV==="production",
+      sameSite:"strict",
+      maxAge:7*24*60*60*1000
+    })
+
     res.status(201).json({
       message: "Signup successful",
-      token,
+      
       user: {
         id: user._id,
         fullName: user.fullName,
@@ -84,10 +92,16 @@ export const Signin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
-
+// store token in HTTP only cookie
+res.cookie("token",token,{
+  httpOnly:true,
+  secure:process.env.NODE_ENV==="production",
+  sameSite:"strict",
+  maxAge:7*24*60*60*1000
+})
     res.status(200).json({
       message: "Signin successful",
-      token,
+      
       user: {
         id: user._id,
         fullName: user.fullName,
