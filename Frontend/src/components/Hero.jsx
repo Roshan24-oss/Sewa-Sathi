@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import electrician from "../assets/electricity.jpg";
 import plumber from "../assets/plumber.jpg";
 import car from "../assets/car.jpg";
@@ -6,6 +7,7 @@ import nurse from "../assets/nurse.avif";
 import teacher from "../assets/teacher.avif";
 import carpenter from "../assets/carpenter.jpg";
 import cleaner from "../assets/cleaner.webp";
+import technician from "../assets/tv.jpeg"
 
 const services = [
   { img: plumber, title: "Plumber" },
@@ -13,14 +15,14 @@ const services = [
   { img: nurse, title: "Nurse" },
   { img: teacher, title: "Teacher" },
   { img: car, title: "Car Repair" },
-  { img: plumber, title: "Plumber" },
+  { img: technician, title: "Technician" },
   { img: carpenter, title: "Carpenter" },
   { img: cleaner, title: "Cleaner" },
 ];
 
 const Hero = ({ className }) => {
 
-  
+  const navigate =useNavigate();
 
   return (
     <div className={`w-full min-h-screen p-5 ${className}`}>
@@ -54,7 +56,8 @@ const Hero = ({ className }) => {
   
   <div className="font-bold absolute bottom-0 w-full bg-black/60
                   text-white text-center py-2">
-    {service.title}  <span className="text-sm text-gray-300 block mt-1"><button className="bg-red-600 rounded p-1 hover:bg-orange-600 ">Book Now</button></span>
+    {service.title}  <span className="text-sm text-gray-300 block mt-1">
+      <button className="bg-red-600 rounded p-1 hover:bg-orange-600 " onClick={()=>navigate("/signin")}>Book Now</button></span>
   </div>
 </div>
 
