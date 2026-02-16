@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import authRoutes from "./routes/authRoutes.js"
 import providerRoutes from "./routes/providerRoutes.js"
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(cors(
     }
 ));
 
+app.use(cookieParser());
 app.use(express.json())
 app.use("/api/auth",authRoutes);
 app.use("/api/provider",providerRoutes);
