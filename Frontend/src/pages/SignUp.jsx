@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const SignUp = () => {
   const navigate = useNavigate();
-
+const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -37,10 +39,7 @@ const SignUp = () => {
         formData
       );
 
-      // Save token & user
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
+      login(res.data.user, res.data.token);
       console.log("Signup Response:", res.data);
 
       alert("Signup successful ✅");
