@@ -1,38 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes, FaSearch, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import logo from "../assets/logo.png";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const { user, logout } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const dropdownRef = useRef();
-
-  // Check login
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
         setDropdownOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
+    logout();
     navigate("/");
   };
 
@@ -45,24 +43,23 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <div onClick={handleLogoClick}
-        >
+        <div onClick={handleLogoClick} className="cursor-pointer">
           <img src={logo} alt="logo" className="h-12" />
         </div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-lg">
 
-          
+          <Link to="/moreinfo" className="font-medium">
+            थप जानकारी
+          </Link>
 
-          <Link to ="/moreinfo" className="font-medium">थप जानकारी</Link>
-          
-          <Link to="/contact" className="block font-medium">ContactUs</Link>
-          
+          <Link to="/contact" className="font-medium">
+            ContactUs
+          </Link>
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              
               {/* Profile Button */}
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -116,11 +113,21 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-4">
 
-        
-          <Link to="/moreinfo"className="block font-medium">थप जानकारी</Link>
+          <Link
+            to="/moreinfo"
+            className="block font-medium"
+            onClick={() => setIsOpen(false)}
+          >
+            थप जानकारी
+          </Link>
 
-          <Link to="/contact" className="block font-medium">ContactUs</Link>
-         
+          <Link
+            to="/contact"
+            className="block font-medium"
+            onClick={() => setIsOpen(false)}
+          >
+            ContactUs
+          </Link>
 
           {user ? (
             <>
@@ -143,6 +150,7 @@ const Navbar = () => {
             <Link
               to="/signin"
               className="block bg-orange-600 rounded-xl px-4 py-2 text-white text-center font-bold"
+              onClick={() => setIsOpen(false)}
             >
               Sign In
             </Link>

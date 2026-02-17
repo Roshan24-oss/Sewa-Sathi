@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import {AuthContext} from "../context/AuthContext";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const [data, setData] = useState({
     email: "",
@@ -23,12 +26,11 @@ const SignIn = () => {
         data
       );
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+     login(res.data.user, res.data.token);
 
       alert("Login successful ✅");
       navigate("/");
-      window.location.reload();
+      
     } catch (error) {
       alert(error.response?.data?.message || "Login failed ❌");
     }
