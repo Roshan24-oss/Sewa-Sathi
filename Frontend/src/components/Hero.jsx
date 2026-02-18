@@ -8,6 +8,8 @@ import teacher from "../assets/teacher.avif";
 import carpenter from "../assets/carpenter.jpg";
 import cleaner from "../assets/cleaner.webp";
 import technician from "../assets/tv.jpeg"
+import {useContext} from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const services = [
   { img: plumber, title: "Plumber" },
@@ -31,7 +33,7 @@ else{
 }
 
   const navigate =useNavigate();
-    const user= JSON.parse(localStorage.getItem("user"));
+    const {user}=useContext(AuthContext);
 
   return (
     <div className={`w-full min-h-screen p-5 ${className}`}>
