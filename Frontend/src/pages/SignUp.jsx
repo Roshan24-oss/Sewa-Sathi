@@ -36,7 +36,8 @@ const { login } = useContext(AuthContext);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/auth/signup",
-        formData
+        formData,
+        { withCredentials: true }
       );
 
       login(res.data.user, res.data.token);
@@ -45,14 +46,18 @@ const { login } = useContext(AuthContext);
       alert("Signup successful ✅");
 
       // Redirect after signup
-      navigate("/");
+      if(res.data.user.role=="Provider"){
+        navigate("/providerdashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed ❌");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center px-4 mt-20">
       <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
 
         {/* Header */}
