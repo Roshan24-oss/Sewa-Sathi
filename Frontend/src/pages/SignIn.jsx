@@ -23,14 +23,18 @@ const SignIn = () => {
     try {
       const res = await axios.post(
         "http://localhost:8000/api/auth/signin",
-        data
+        data,
+        { withCredentials: true }
       );
 
      login(res.data.user, res.data.token);
 
       alert("Login successful ✅");
-      navigate("/");
-      
+        if(res.data.user.role=="Provider"){
+          navigate("/providerdashboard");
+        } else {
+          navigate("/");
+        }
     } catch (error) {
       alert(error.response?.data?.message || "Login failed ❌");
     }

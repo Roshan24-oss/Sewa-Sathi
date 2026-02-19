@@ -11,8 +11,10 @@ import WhatsAppButton from "./components/WhatsApp.jsx";
 import ProviderDashboard from "./components/ProviderDashboard.jsx";
 import ProviderHome from "./pages/ProviderHome.jsx";
 import ServiceProviderList from "./pages/ServiceProviderList.jsx";
+import {useContext} from "react";
+import {AuthContext} from "./context/AuthContext.jsx";
 const App = () => {
-  const user= JSON.parse(localStorage.getItem("user"));
+const {user}=useContext(AuthContext);
   return (
     <>
       <Navbar />
