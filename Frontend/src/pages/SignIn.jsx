@@ -30,11 +30,16 @@ const SignIn = () => {
      login(res.data.user, res.data.token);
 
       alert("Login successful ✅");
-        if(res.data.user.role=="Provider"){
-          navigate("/providerdashboard");
-        } else {
-          navigate("/");
-        }
+      
+if(res.data.user.role=="provider"){
+  if(!res.data.user.address){
+    navigate("/providerdashboard");
+  }
+ else{ navigate("/providerhome");}
+}else{
+  navigate("/");
+}
+
     } catch (error) {
       alert(error.response?.data?.message || "Login failed ❌");
     }

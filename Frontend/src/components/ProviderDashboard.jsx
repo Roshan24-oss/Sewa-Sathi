@@ -39,7 +39,8 @@ const ProviderDashboard = () => {
         formData
         
       );
-     
+     const updatedUser=res.data.user;
+     localStorage.setItem("user",JSON.stringify(updatedUser));
       navigate("/providerhome");
       console.log(res.data);
     } catch (error) {
