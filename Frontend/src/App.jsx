@@ -20,7 +20,7 @@ const {user}=useContext(AuthContext);
       <Navbar />
 
       <Routes>
-        <Route path="/" element={user?.role==="provider"?<ProviderDashboard />:<Hero />} />
+       <Route path="/" element={user?.role==="provider"?user.address?<ProviderHome />:<ProviderDashboard />:<Hero />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/moreinfo" element={<MoreInfo />} />
