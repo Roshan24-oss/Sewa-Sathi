@@ -26,9 +26,10 @@ const userSchema = new mongoose.Schema({
     },
     services:{
         type:String,
+        enum:["Plumber","Electrician","Tutor","Carpenter","Doctor","Cleaner","Other"]
     },
 
-    // 🔥 ADD THESE FOR PROVIDER
+    
     address:{
         type:String,
     },

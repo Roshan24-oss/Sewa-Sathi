@@ -23,9 +23,9 @@ const services = [
 ];
 
 const Hero = ({ className }) => {
-const handleBookNow=()=>{
+const handleBookNow=(serviceTitle)=>{
   if(user){
-    navigate("/serviceproviders");
+    navigate(`/providers/${serviceTitle}`);
   }
 else{
   navigate("/signin");
@@ -68,7 +68,7 @@ else{
   <div className="font-bold absolute bottom-0 w-full bg-black/60
                   text-white text-center py-2">
     {service.title}  <span className="text-sm text-gray-300 block mt-1">
-      <button className="bg-red-600 rounded p-1 hover:bg-orange-600 " onClick={handleBookNow}>Book Now</button></span>
+      <button className="bg-red-600 rounded p-1 hover:bg-orange-600 " onClick={() => handleBookNow(service.title)}>Book Now</button></span>
   </div>
 </div>
 
