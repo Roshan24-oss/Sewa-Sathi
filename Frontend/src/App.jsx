@@ -26,7 +26,7 @@ const {user}=useContext(AuthContext);
         <Route path="/moreinfo" element={<MoreInfo />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/providerhome" element={<ProviderHome />} />
-        <Route path="/serviceproviders" element={<ServiceProviderList />} />
+        <Route path="/providers/:serviceType" element={<ServiceProviderList />} />
       </Routes>
 
       <Footer />
