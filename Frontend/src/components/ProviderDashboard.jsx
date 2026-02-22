@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../api/axiosInstance"; 
-import {useNavigate} from "react-router-dom";
-
+import axiosInstance from "../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const ProviderDashboard = () => {
-
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -37,13 +35,18 @@ const ProviderDashboard = () => {
       const res = await axiosInstance.post(
         "provider/providerprofile",
         formData
-        
       );
-     const updatedUser=res.data.user;
-     localStorage.setItem("user",JSON.stringify(updatedUser));
+
+      const updatedUser = res.data.user;
+
+      // Update localStorage
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      // Redirect to provider home
       navigate("/providerhome");
-      console.log(res.data);
+
     } catch (error) {
+      console.error(error);
       alert("Error updating profile ❌");
     }
   };
@@ -51,16 +54,15 @@ const ProviderDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8 mt-20">
       <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8">
-        
-        {/* Header */}
+
         <h1 className="text-3xl font-bold text-center text-orange-600 mb-2">
           Welcome {user?.fullName} 👋
         </h1>
+
         <p className="text-center text-gray-500 mb-6">
           Service: {user?.services}
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
@@ -76,9 +78,7 @@ const ProviderDashboard = () => {
           </div>
 
           <div>
-            <label className="block font-medium mb-1">
-              Experience (Years)
-            </label>
+            <label className="block font-medium mb-1">Experience (Years)</label>
             <input
               type="number"
               name="experience"
@@ -103,9 +103,7 @@ const ProviderDashboard = () => {
           </div>
 
           <div>
-            <label className="block font-medium mb-1">
-              Availability
-            </label>
+            <label className="block font-medium mb-1">Availability</label>
             <input
               type="text"
               name="availability"
