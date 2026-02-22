@@ -47,7 +47,7 @@ const { login } = useContext(AuthContext);
 
       // Redirect after signup
       if(res.data.user.role=="provider"){
-        navigate("/providerdashboard");
+        navigate("/");
       } else {
         navigate("/");
       }

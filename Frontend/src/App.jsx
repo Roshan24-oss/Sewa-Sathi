@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Footer from "./components/Footer.jsx";
@@ -11,22 +12,45 @@ import WhatsAppButton from "./components/WhatsApp.jsx";
 import ProviderDashboard from "./components/ProviderDashboard.jsx";
 import ProviderHome from "./pages/ProviderHome.jsx";
 import ServiceProviderList from "./pages/ServiceProviderList.jsx";
-import {useContext} from "react";
-import {AuthContext} from "./context/AuthContext.jsx";
+import { AuthContext } from "./context/AuthContext.jsx";
+
 const App = () => {
-const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <Navbar />
 
       <Routes>
-       <Route path="/" element={user?.role==="provider"?user.address?<ProviderHome />:<ProviderDashboard />:<Hero />} />
+        {/* Home Route */}
+        <Route
+          path="/"
+          element={
+            user?.role === "provider"
+              ? user.address
+                ? <ProviderHome />
+                : <ProviderDashboard />
+              : <Hero />
+          }
+        />
+
+        {/* Auth Routes */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+
+        {/* Other Pages */}
         <Route path="/moreinfo" element={<MoreInfo />} />
         <Route path="/contact" element={<ContactUs />} />
+
+        {/* Provider Routes */}
+        <Route path="/providerdashboard" element={<ProviderDashboard />} />
         <Route path="/providerhome" element={<ProviderHome />} />
+
+        {/* Dynamic Providers */}
         <Route path="/providers/:serviceType" element={<ServiceProviderList />} />
+
+        {/* Optional 404 Route */}
+        <Route path="*" element={<h1 className="text-center mt-20 text-2xl">Page Not Found</h1>} />
       </Routes>
 
       <Footer />
