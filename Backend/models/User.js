@@ -1,36 +1,51 @@
 import mongoose from "mongoose";
 
-const requestSchema = new mongoose.Schema(
-  {
-    customerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    providerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    serviceType: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
-      required: true,
-    },
-    time: {
-      type: Date,
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["pending", "accepted", "rejected"],
-      default: "pending",
-    },
-  },
-  { timestamps: true }
-);
+const userSchema = new mongoose.Schema({
 
-export default mongoose.model("Request", requestSchema);
+    fullName:{
+        type:String,
+        required:true,
+    },
+    email:{
+        type:String,
+        required:true,   // ❗ also fix spelling (you wrote requied)
+        unique:true,
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    phone:{
+        type:String,
+        required:true,
+    },
+    role:{
+        type:String,
+        enum:["customer","provider"],
+        required:true,
+    },
+    services:{
+        type:String,
+        enum:["Plumber","Electrician","Tutor","Carpenter","Doctor","Cleaner","Other"]
+    },
+
+    
+    address:{
+        type:String,
+    },
+    experience:{
+        type:Number,
+    },
+    skills:{
+        type:String,
+    },
+    availability:{
+        type:String,
+    },
+    about:{
+        type:String,
+    }
+
+},{timestamps:true})
+
+export default mongoose.model("User", userSchema)

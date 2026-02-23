@@ -5,6 +5,7 @@ import authRoutes from "./routes/authRoutes.js"
 import providerRoutes from "./routes/providerRoutes.js"
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import requestRoutes from './routes/requestRoutes.js';
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.json())
 app.use("/api/auth",authRoutes);
 app.use("/api/provider",providerRoutes);
+app.use("/api/requests",requestRoutes);
 
 app.get('/',(req,res)=>{
     res.send("Server is running yes we dit it");
