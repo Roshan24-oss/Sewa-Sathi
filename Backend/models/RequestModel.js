@@ -1,18 +1,36 @@
 import mongoose from "mongoose";
 
-const requestSchema =new mongoose.Schema({
+const requestSchema = new mongoose.Schema(
+  {
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    providerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    serviceType: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: String,
+      required: true,
+    },
+    time: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "accepted", "rejected"],
+      default: "pending",
+    },
+  },
+  { timestamps: true }
+);
 
-    customerId:objectId,
-    providerId:objectId,
-    serviceType:String,
-    date:Date,
-    time:String,
-    status:{
-        type:String,
-        enum:["pending","accepted","rejected"]
-    }
-},{timestamps:true})
-
-
-
-export default mongoose.model("Request",requestSchema)
+export default mongoose.model("Request", requestSchema);
