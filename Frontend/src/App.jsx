@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar.jsx";
@@ -6,16 +6,34 @@ import Hero from "./components/Hero.jsx";
 import Footer from "./components/Footer.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import MoreInfo from "./pages/MoreInfo.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import WhatsAppButton from "./components/WhatsApp.jsx";
 import ProviderDashboard from "./components/ProviderDashboard.jsx";
 import ProviderHome from "./pages/ProviderHome.jsx";
 import ServiceProviderList from "./pages/ServiceProviderList.jsx";
+import MoreInfo from "./pages/MoreInfo.jsx"; 
+
 import { AuthContext } from "./context/AuthContext.jsx";
+import socket from "./socket.js";
 
 const App = () => {
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+    
+      socket.emit("join", user.id);
+    }
+
+    socket.on("requestStatusUpdated", (data) => {
+      alert(data.message); 
+      console.log("Request status updated:", data);
+    });
+
+    return () => {
+      socket.off("requestStatusUpdated");
+    };
+  }, [user]); 
 
   return (
     <>
@@ -49,8 +67,15 @@ const App = () => {
         {/* Dynamic Providers */}
         <Route path="/providers/:serviceType" element={<ServiceProviderList />} />
 
-        {/* Optional 404 Route */}
-        <Route path="*" element={<h1 className="text-center mt-20 text-2xl">Page Not Found</h1>} />
+        {/* 404 Route */}
+        <Route
+          path="*"
+          element={
+            <h1 className="text-center mt-20 text-2xl">
+              Page Not Found
+            </h1>
+          }
+        />
       </Routes>
 
       <Footer />
