@@ -27,8 +27,8 @@ const ProviderHome = () => {
   };
 
   return (
-    <div className="p-6 mt-30 min-h-screen w-full">
-      <h2 className="text-2xl font-bold mb-4">Service Requests</h2>
+    <div className="p-6 pt-30 text-center min-h-screen w-full bg-gray-400 ">
+      <h2 className="text-2xl font-bold mb-4 text-blue-800">Service Requests</h2>
 
       {requests.map((req) => (
         <div key={req._id} className="border p-4 mb-3 rounded shadow">

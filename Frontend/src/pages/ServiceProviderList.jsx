@@ -8,8 +8,7 @@ const ServiceProviderList = () => {
   const { serviceType } = useParams();
 
   const [providers, setProviders] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
+  const [bookingDetails, setBookingDetails] = useState({}); // Store date & time per provider
 
   // Fetch Providers
   useEffect(() => {
@@ -25,12 +24,37 @@ const ServiceProviderList = () => {
     fetchProviders();
   }, [serviceType]);
 
+  // Handle Date Change
+  const handleDateChange = (providerId, value) => {
+    setBookingDetails((prev) => ({
+      ...prev,
+      [providerId]: {
+        ...prev[providerId],
+        date: value,
+      },
+    }));
+  };
+
+  // Handle Time Change
+  const handleTimeChange = (providerId, value) => {
+    setBookingDetails((prev) => ({
+      ...prev,
+      [providerId]: {
+        ...prev[providerId],
+        time: value,
+      },
+    }));
+  };
+
   // Handle Request
   const handleRequest = async (providerId) => {
     if (!user) {
       alert("Please login first");
       return;
     }
+
+    const selectedDate = bookingDetails[providerId]?.date;
+    const selectedTime = bookingDetails[providerId]?.time;
 
     if (!selectedDate || !selectedTime) {
       alert("Please select date and time");
@@ -46,11 +70,12 @@ const ServiceProviderList = () => {
       });
 
       alert("Request Sent Successfully!");
-      console.log("Request sent:", { providerId, serviceType, date: selectedDate, time: selectedTime });
 
-      // Clear after sending
-      setSelectedDate("");
-      setSelectedTime("");
+      // Clear only this provider's booking data
+      setBookingDetails((prev) => ({
+        ...prev,
+        [providerId]: { date: "", time: "" },
+      }));
     } catch (error) {
       console.error("Error sending request:", error);
     }
@@ -90,15 +115,19 @@ const ServiceProviderList = () => {
                 <div className="mb-3">
                   <input
                     type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
+                    value={bookingDetails[provider._id]?.date || ""}
+                    onChange={(e) =>
+                      handleDateChange(provider._id, e.target.value)
+                    }
                     className="w-full mb-2 p-2 border rounded"
                   />
 
                   <input
                     type="time"
-                    value={selectedTime}
-                    onChange={(e) => setSelectedTime(e.target.value)}
+                    value={bookingDetails[provider._id]?.time || ""}
+                    onChange={(e) =>
+                      handleTimeChange(provider._id, e.target.value)
+                    }
                     className="w-full p-2 border rounded"
                   />
                 </div>
