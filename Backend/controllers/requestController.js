@@ -5,15 +5,26 @@ export const createRequest = async (req, res) => {
   try {
     const { providerId, serviceType, date, time } = req.body;
 
-    const newRequest = new Request({
+    let newRequest = new Request({
       customerId: req.user.id,
       providerId,
       serviceType,
       date,
       time,
+      status: "pending",
     });
 
     await newRequest.save();
+
+    // Populate customer info before emitting
+    newRequest = await newRequest.populate("customerId", "fullName email");
+
+    const io = req.app.get("io");
+
+    io.to(providerId.toString()).emit("newRequest", {
+      message: "New service request received",
+      request: newRequest,
+    });
 
     res.status(201).json({
       message: "Request sent successfully",
