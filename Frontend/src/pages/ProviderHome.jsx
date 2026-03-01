@@ -123,6 +123,7 @@ const ProviderHome = () => {
               <div className="mt-4 flex gap-3">
                 <button
                   onClick={() => updateStatus(req._id, "accepted")}
+                  
                   className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-medium transition duration-200 shadow-md hover:scale-105"
                 >
                   Accept
