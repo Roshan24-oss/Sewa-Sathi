@@ -92,3 +92,21 @@ export const updateRequestStatus = async (req, res) => {
     });
   }
 };
+
+
+export const getCustomerRequests = async (req, res) => {
+  try {
+    const requests = await Request.find({
+      customerId: req.user.id,
+    })
+      .populate("providerId", "fullName phone serviceType")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(requests);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching customer requests",
+      error: error.message,
+    });
+  }
+};

@@ -12,6 +12,7 @@ import ProviderDashboard from "./components/ProviderDashboard.jsx";
 import ProviderHome from "./pages/ProviderHome.jsx";
 import ServiceProviderList from "./pages/ServiceProviderList.jsx";
 import MoreInfo from "./pages/MoreInfo.jsx"; 
+import Activities from "./pages/Activities.jsx";
 
 import { AuthContext } from "./context/AuthContext.jsx";
 import socket from "./socket.js";
@@ -59,6 +60,7 @@ const App = () => {
         {/* Other Pages */}
         <Route path="/moreinfo" element={<MoreInfo />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/activities"  element={user?.role === "customer" ? <Activities /> : null} />
 
         {/* Provider Routes */}
         <Route path="/providerdashboard" element={<ProviderDashboard />} />

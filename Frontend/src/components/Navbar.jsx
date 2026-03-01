@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
 
@@ -12,6 +12,9 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const dropdownRef = useRef();
+
+  // ✅ Show bag only for NOT logged in OR customer
+  const showBag = !user || user.role === "customer";
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -38,6 +41,15 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // ✅ Bag click logic
+  const handleBagClick = () => {
+    if (!user) {
+      navigate("/signin"); // Not logged in → Signin
+    } else if (user.role === "customer") {
+      navigate("/activities"); // Customer → Activities
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full bg-amber-200 shadow-md z-50">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -60,7 +72,6 @@ const Navbar = () => {
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              {/* Profile Button */}
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="flex items-center gap-2 font-semibold"
@@ -69,10 +80,8 @@ const Navbar = () => {
                 {user.fullName}
               </button>
 
-              {/* Dropdown */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-3 w-44 bg-white rounded-xl shadow-lg py-2 text-sm">
-
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
@@ -87,7 +96,6 @@ const Navbar = () => {
                   >
                     Logout
                   </button>
-
                 </div>
               )}
             </div>
@@ -99,13 +107,39 @@ const Navbar = () => {
               Sign In
             </Link>
           )}
+
+          {/* ✅ Desktop Bag */}
+          {showBag && (
+            <div
+              className="flex flex-col items-center text-orange-600 cursor-pointer hover:text-orange-700"
+              onClick={handleBagClick}
+            >
+              <FaShoppingBag size={22} />
+              <span className="text-sm font-medium">Activities</span>
+            </div>
+          )}
+
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        {/* Mobile Icons */}
+        <div className="md:hidden flex items-center gap-6">
+
+          {/* ✅ Mobile Bag */}
+          {showBag && (
+            <div
+              className="flex flex-col items-center text-orange-600 cursor-pointer"
+              onClick={handleBagClick}
+            >
+              <FaShoppingBag size={22} />
+              <span className="text-xs font-medium">Activities</span>
+            </div>
+          )}
+
+          {/* Menu Button */}
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
+
         </div>
       </div>
 
