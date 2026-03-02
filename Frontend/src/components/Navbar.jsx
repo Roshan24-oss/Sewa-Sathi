@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes, FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
+import NotificationBell from "./NotificationBell";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +42,11 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // ✅ Bag click logic
   const handleBagClick = () => {
     if (!user) {
-      navigate("/signin"); // Not logged in → Signin
+      navigate("/signin");
     } else if (user.role === "customer") {
-      navigate("/activities"); // Customer → Activities
+      navigate("/activities");
     }
   };
 
@@ -69,6 +69,9 @@ const Navbar = () => {
           <Link to="/contact" className="font-medium">
             ContactUs
           </Link>
+
+          {/* 🔔 Notification Bell (Only when logged in) */}
+          {user && <NotificationBell />}
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
@@ -108,7 +111,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* ✅ Desktop Bag */}
+          {/* Desktop Bag */}
           {showBag && (
             <div
               className="flex flex-col items-center text-orange-600 cursor-pointer hover:text-orange-700"
@@ -124,7 +127,10 @@ const Navbar = () => {
         {/* Mobile Icons */}
         <div className="md:hidden flex items-center gap-6">
 
-          {/* ✅ Mobile Bag */}
+          {/* 🔔 Mobile Notification */}
+          {user && <NotificationBell />}
+
+          {/* Mobile Bag */}
           {showBag && (
             <div
               className="flex flex-col items-center text-orange-600 cursor-pointer"
