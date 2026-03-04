@@ -2,10 +2,11 @@
 import express from "express";
 import Notification from "../models/Notification.js";
 import authMiddleware from "../middlewares/authMiddlewares.js";
+import {deleteNotification} from "../controllers/notificationController.js";
 
 const router = express.Router();
 
-// Mark notification as read
+router.delete("/notifications/:id",authMiddleware,deleteNotification);
 router.put("/notifications/:id", authMiddleware, async (req, res) => {
   try {
     const notification = await Notification.findByIdAndUpdate(
@@ -19,4 +20,5 @@ router.put("/notifications/:id", authMiddleware, async (req, res) => {
   }
 });
 
-export default router; // ✅ default export for ESM
+
+export default router; 

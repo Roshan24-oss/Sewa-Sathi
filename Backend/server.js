@@ -29,13 +29,13 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/provider", providerRoutes);
 app.use("/api/requests", requestRoutes);
-app.use("/api", notificationRoutes); // ✅ Add notification routes
+app.use("/api", notificationRoutes); 
 
 app.get("/", (req, res) => {
   res.send("Server is running...");
 });
 
-// ✅ Create server + socket.io
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -45,10 +45,9 @@ const io = new Server(server, {
   },
 });
 
-// Make io accessible in controllers
 app.set("io", io);
 
-// ✅ Socket.io connection
+
 io.on("connection", (socket) => {
   console.log("User Connected: ", socket.id);
 
