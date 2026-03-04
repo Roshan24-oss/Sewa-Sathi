@@ -127,7 +127,7 @@ const Navbar = () => {
         {/* Mobile Icons */}
         <div className="md:hidden flex items-center gap-6">
 
-          {/* 🔔 Mobile Notification */}
+          
           {user && <NotificationBell />}
 
           {/* Mobile Bag */}
