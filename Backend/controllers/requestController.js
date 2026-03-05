@@ -59,7 +59,7 @@ export const createRequest = async (req, res) => {
 export const getProviderRequests = async (req, res) => {
   try {
     const requests = await Request.find({ providerId: req.user._id })
-      .populate("customerId", "fullName email")
+      .populate("customerId", "fullName email phone")
       .sort({ createdAt: -1 });
 
     res.status(200).json(requests);
