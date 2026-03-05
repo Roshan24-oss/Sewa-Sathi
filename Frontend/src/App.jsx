@@ -16,6 +16,7 @@ import Activities from "./pages/Activities.jsx";
 
 import { AuthContext } from "./context/AuthContext.jsx";
 import socket from "./socket.js";
+import Profile from "./pages/profile.jsx"
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -61,6 +62,7 @@ const App = () => {
         <Route path="/moreinfo" element={<MoreInfo />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/activities"  element={user?.role === "customer" ? <Activities /> : null} />
+        <Route path="/profilepage" element={<Profile/>}/>
 
         {/* Provider Routes */}
         <Route path="/providerdashboard" element={<ProviderDashboard />} />
