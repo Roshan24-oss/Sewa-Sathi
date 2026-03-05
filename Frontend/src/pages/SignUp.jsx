@@ -36,12 +36,12 @@ const { login } = useContext(AuthContext);
 
     try {
       const res = await axiosInstance.post(
-        "/api/auth/signup",
+        "/auth/signup",
         formData,
         { withCredentials: true }
       );
 
-      login(res.data.user, res.data.token);
+      login(res.data.user);
       console.log("Signup Response:", res.data);
 
       alert("Signup successful ✅");

@@ -40,7 +40,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://sewa-sathi.onrender.com",
+    origin:[ "https://sewa-sathi.onrender.com"],
     credentials: true,
   },
 });
