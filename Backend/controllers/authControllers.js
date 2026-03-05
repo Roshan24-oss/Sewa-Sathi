@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// ===================== SIGNUP =====================
+
 export const Signup = async (req, res) => {
   try {
     const { fullName, email, password, phone,role,services } = req.body;
@@ -41,8 +41,8 @@ export const Signup = async (req, res) => {
     // store token in HTTP only cookie
     res.cookie("token",token,{
       httpOnly:true,
-      secure:false,
-      sameSite:"lax",
+      secure:true,
+      sameSite:"none",
       maxAge:7*24*60*60*1000
     })
 
@@ -64,7 +64,7 @@ export const Signup = async (req, res) => {
   }
 };
 
-// ===================== SIGNIN =====================
+
 export const Signin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -95,8 +95,8 @@ export const Signin = async (req, res) => {
 // store token in HTTP only cookie
 res.cookie("token",token,{
   httpOnly:true,
-  secure:false,
-  sameSite:"lax",
+  secure:true,
+  sameSite:"none",
   maxAge:7*24*60*60*1000
 })
     res.status(200).json({
@@ -116,3 +116,4 @@ res.cookie("token",token,{
     res.status(500).json({ message: error.message });
   }
 };
+   

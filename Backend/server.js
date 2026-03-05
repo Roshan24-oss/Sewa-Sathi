@@ -4,7 +4,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import providerRoutes from "./routes/providerRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
-import notificationRoutes from "./routes/notificationRoutes.js"; // ✅ Add this
+import notificationRoutes from "./routes/notificationRoutes.js"; 
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
@@ -18,7 +18,7 @@ const app = express();
 // ✅ Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://sewa-sathi.onrender.com",
     credentials: true,
   })
 );
@@ -40,7 +40,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://sewa-sathi.onrender.com",
     credentials: true,
   },
 });

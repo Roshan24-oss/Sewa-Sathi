@@ -8,11 +8,11 @@ const authMiddleware = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ Fetch full user info from DB
+   
     const user = await User.findById(decoded.id);
     if (!user) return res.status(401).json({ message: "User not found" });
 
-    req.user = user; // now req.user has fullName, email, role, etc.
+    req.user = user; 
 
     next();
   } catch (error) {
