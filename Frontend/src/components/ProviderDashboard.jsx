@@ -33,7 +33,7 @@ const ProviderDashboard = () => {
 
     try {
       const res = await axiosInstance.post(
-        "/api/provider/providerprofile",
+        "/provider/providerprofile",
         formData
       );
 

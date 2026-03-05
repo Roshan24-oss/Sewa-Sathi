@@ -22,12 +22,12 @@ const SignIn = () => {
 
     try {
       const res = await axiosInstance.post(
-        "/api/auth/signin",
+        "/auth/signin",
         data,
         { withCredentials: true }
       );
 
-     login(res.data.user, res.data.token);
+     login(res.data.user);
 
       alert("Login successful ✅");
       

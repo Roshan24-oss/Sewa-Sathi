@@ -25,16 +25,16 @@ const ProviderHome = () => {
     }
   }, []);
 
-  // Socket: Join room & listen for new requests
+
   useEffect(() => {
-    if (!user?._id) return; // wait until user is loaded
+    if (!user?.id) return; 
 
     // Load old requests
     fetchRequests();
 
     // Join provider room
     if (!socket.connected) socket.connect();
-    socket.emit("join", user._id);
+    socket.emit("join", user.id);
 
     // Handle new requests
     const handleNewRequest = (data) => {
