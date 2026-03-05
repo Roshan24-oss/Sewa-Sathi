@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import axiosInstance from "../api/axiosInstance.js"
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -34,8 +35,8 @@ const { login } = useContext(AuthContext);
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/auth/signup",
+      const res = await axiosInstance.post(
+        "/api/auth/signup",
         formData,
         { withCredentials: true }
       );

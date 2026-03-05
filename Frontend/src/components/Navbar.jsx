@@ -14,10 +14,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef();
 
-  // ✅ Show bag only for NOT logged in OR customer
+  
   const showBag = !user || user.role === "customer";
 
-  // Close dropdown when clicking outside
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -70,7 +70,7 @@ const Navbar = () => {
             ContactUs
           </Link>
 
-          {/* 🔔 Notification Bell (Only when logged in) */}
+         
           {user && <NotificationBell />}
 
           {user ? (
