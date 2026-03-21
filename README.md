@@ -121,4 +121,4 @@ Developed by **Roshan Khadayat **
 
 
 This project is for **educational and learning purposes**.  
-                  Thank You.
+                  Thank You
