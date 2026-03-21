@@ -112,7 +112,7 @@ npm start
 
 ---
 
-## Author
+## Author.
 
 Developed by **Roshan Khadayat **
 
