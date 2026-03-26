@@ -21,7 +21,7 @@ The system also includes **real-time notifications using Socket.IO** to keep use
 * **Request services** from providers
 * **Select preferred date and time**
 * Receive **real-time notifications**
-* **WhatsApp chat integration** after booking is accepted
+* **WhatsApp chat integration** after booking is accepted 
 
 ### Service Provider Features
 
