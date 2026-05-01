@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true,   // ❗ also fix spelling (you wrote requied)
+        required:true,  
         unique:true,
     },
     password:{
