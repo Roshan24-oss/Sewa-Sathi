@@ -114,7 +114,7 @@ npm start
 
 ## Author.
 
-Developed by **Roshan Khadayat **
+Developed by **Roshan Khadayat *
 
 ---
 
