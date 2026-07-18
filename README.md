@@ -5,7 +5,6 @@
 Service Connect is a web-based platform that connects **users with local service providers** such as electricians, plumbers, cleaners, and other household professionals.
 
 The platform allows service providers to **register and offer their services**, while users can **request services, select a date and time, and book appointments** easily.
-
 After a service request is made, the provider can **accept or reject the booking**, and once accepted, both parties can continue communication through **WhatsApp integration**.
 
 The system also includes **real-time notifications using Socket.IO** to keep users and service providers updated about booking requests and status changes.
